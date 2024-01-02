@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="746.0" styleClass="bodybg" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapplication.HelloController">
+   <children>
+      <VBox prefHeight="512.0" prefWidth="746.0" styleClass="bodybg">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter location" wrappingWidth="344.5625">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="locationtext" opacity="0.5" prefHeight="26.0" prefWidth="354.0" promptText="location">
+               <font>
+                  <Font name="System Bold Italic" size="17.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </VBox.margin></TextField>
+            <Button fx:id="searchbutton" alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#onSearchButtonClick" text="search" />
+            <ImageView fx:id="weatherimage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="weather" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font></Text>
+            <Text fx:id="temp" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="40.0" />
+               </font></Text>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
