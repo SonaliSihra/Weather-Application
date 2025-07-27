@@ -35,15 +35,15 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        getPropertiesConfig();
+        Scene scene = new Scene(root, 1000, 700);
 
-        Scene scene = new Scene(root, 500, 500);
-
-        stage.setTitle("FXML Welcome");
+        stage.setTitle("Weather Application");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         launch();
     }
 }
