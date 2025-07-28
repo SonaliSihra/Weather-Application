@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="746.0" styleClass="bodybg" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapplication.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="746.0" styleClass="bodybg" stylesheets="@application.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapplication.HelloController">
    <children>
-      <VBox prefHeight="512.0" prefWidth="746.0" styleClass="bodybg">
+      <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="725.0" styleClass="bodybg" AnchorPane.bottomAnchor="762.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="-3.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter location" wrappingWidth="344.5625">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter location" wrappingWidth="136.5625">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
-            <TextField fx:id="locationtext" opacity="0.5" prefHeight="26.0" prefWidth="354.0" promptText="location">
+            <TextField fx:id="locationtext" opacity="0.5" prefHeight="28.0" prefWidth="714.0" promptText="location">
                <font>
                   <Font name="System Bold Italic" size="17.0" />
                </font>
                <padding>
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding>
-               <VBox.margin>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </VBox.margin></TextField>
+            </TextField>
             <Button fx:id="searchbutton" alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#onSearchButtonClick" onKeyPressed="#onSearchButtonClick" text="search" />
-            <ImageView fx:id="weatherimage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="weatherimage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="weather-icon" />
             <Text fx:id="weather" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT">
                <font>
                   <Font size="40.0" />
@@ -46,6 +47,21 @@
                </font>
             </Text>
             <Text fx:id="localTime" layoutX="10.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="humidity" layoutX="383.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="sunset" layoutX="383.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="sunrise" layoutX="383.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="40.0" />
                </font>

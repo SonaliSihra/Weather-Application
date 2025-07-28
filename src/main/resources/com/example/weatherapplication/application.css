@@ -1,4 +1,13 @@
+.bodybg {
+-fx-background-image: url("https://plus.unsplash.com/premium_photo-1727730047398-49766e915c1d?q=80&w=1512&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+}
 
-.bodybg{
--fx-background-image: url("https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+.weather-icon {
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain; /* Or cover, depending on scaling */
+    -fx-min-width: 100px;   /* Set width */
+    -fx-min-height: 100px;  /* Set height */
+    -fx-max-width: 100px;
+    -fx-max-height: 100px;
 }

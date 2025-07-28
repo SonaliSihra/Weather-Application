@@ -39,14 +39,21 @@ public class HelloController {
 
     @FXML
     private Text localTime;
+    @FXML
+    private Text sunrise;
+    @FXML
+    private Text sunset;
+    @FXML
+    private Text humidity;
 
     @FXML
     private Button searchbutton;
 
     @FXML
     public void initialize() {
-        searchbutton.setOnKeyPressed(event -> {
+        locationtext.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("enter clicked!!!");
                 searchbutton.fire(); // Programmatically fires the button's action
             }
         });
@@ -54,7 +61,7 @@ public class HelloController {
 
     @FXML
     protected void onSearchButtonClick(ActionEvent event) throws IOException, InterruptedException {
-        initialize();
+
         String locationSearch = locationtext.getText();
         String encodedCity = URLEncoder.encode(locationSearch, StandardCharsets.UTF_8);
         String accessKey = GetPropertyValues.accessKey;
@@ -68,7 +75,7 @@ public class HelloController {
         response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(response.body().toString()).get("current");
+        JsonNode jsonNode = mapper.readTree(response.body()).get("current");
 
         Map<String, ArrayList<Object>> map = mapper.convertValue(jsonNode, Map.class);
 
@@ -82,11 +89,17 @@ public class HelloController {
         observationtime.setText("Checked at: " + map.get("observation_time"));
 
         ObjectMapper locMapper = new ObjectMapper();
-        JsonNode jsonNode1 = locMapper.readTree(response.body().toString()).get("location");
+        JsonNode jsonNode1 = locMapper.readTree(response.body()).get("location");
         Map<String, ArrayList<Object>> locationMap = locMapper.convertValue(jsonNode1, Map.class);
 
         country.setText("Country: " + locationMap.get("country"));
         localTime.setText("localTime: " + locationMap.get("localtime"));
+
+        Map<String, Object> astroMap = (Map<String, Object>) map.get("astro");
+
+        sunrise.setText("sunrise: " + astroMap.get("sunrise"));
+        sunset.setText("sunset: " + astroMap.get("sunset"));
+        humidity.setText("humidity: " + map.get("humidity"));
 
     }
 }
