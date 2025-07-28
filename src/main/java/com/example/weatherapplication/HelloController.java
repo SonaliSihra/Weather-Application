@@ -8,13 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -25,19 +28,45 @@ public class HelloController {
     private Text weather;
     @FXML
     private Text temp;
+    @FXML
+    private Text observationtime;
 
     @FXML
     private ImageView weatherimage;
 
     @FXML
+    private Text country;
+
+    @FXML
+    private Text localTime;
+    @FXML
+    private Text sunrise;
+    @FXML
+    private Text sunset;
+    @FXML
+    private Text humidity;
+
+    @FXML
     private Button searchbutton;
+
+    @FXML
+    public void initialize() {
+        locationtext.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("enter clicked!!!");
+                searchbutton.fire(); // Programmatically fires the button's action
+            }
+        });
+    }
 
     @FXML
     protected void onSearchButtonClick(ActionEvent event) throws IOException, InterruptedException {
 
         String locationSearch = locationtext.getText();
+        String encodedCity = URLEncoder.encode(locationSearch, StandardCharsets.UTF_8);
+        String accessKey = GetPropertyValues.accessKey;
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://api.weatherstack.com/current?access_key=" + "de22ca3008b54bf36cda075680ca92b2" + "&query=" + locationSearch))
+                .uri(URI.create("http://api.weatherstack.com/current?access_key=" + accessKey + "&query=" + encodedCity))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = null;
@@ -46,7 +75,7 @@ public class HelloController {
         response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(response.body().toString()).get("current");
+        JsonNode jsonNode = mapper.readTree(response.body()).get("current");
 
         Map<String, ArrayList<Object>> map = mapper.convertValue(jsonNode, Map.class);
 
@@ -55,7 +84,22 @@ public class HelloController {
 
         weatherimage.setImage(new Image(map.get("weather_icons").get(0).toString()));
 
-        weather.setText((String) map.get("weather_descriptions").get(0));
-        temp.setText(String.valueOf(map.get("temperature")));
+        weather.setText("Weather: " + map.get("weather_descriptions").get(0));
+        temp.setText("Temperature: " + map.get("temperature"));
+        observationtime.setText("Checked at: " + map.get("observation_time"));
+
+        ObjectMapper locMapper = new ObjectMapper();
+        JsonNode jsonNode1 = locMapper.readTree(response.body()).get("location");
+        Map<String, ArrayList<Object>> locationMap = locMapper.convertValue(jsonNode1, Map.class);
+
+        country.setText("Country: " + locationMap.get("country"));
+        localTime.setText("localTime: " + locationMap.get("localtime"));
+
+        Map<String, Object> astroMap = (Map<String, Object>) map.get("astro");
+
+        sunrise.setText("sunrise: " + astroMap.get("sunrise"));
+        sunset.setText("sunset: " + astroMap.get("sunset"));
+        humidity.setText("humidity: " + map.get("humidity"));
+
     }
 }
